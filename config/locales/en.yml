@@ -1,0 +1,7 @@
+en:
+  spree:
+    controller:
+      controller_name: Subscriptions
+    subscriptions:
+      subscriptions: Subscriptions
+      plans: Plans
