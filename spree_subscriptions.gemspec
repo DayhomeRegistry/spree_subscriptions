@@ -15,9 +15,11 @@ Gem::Specification.new do |s|
 
   #s.add_dependency 'spree_api'
   #s.add_dependency 'spree_backend'
-  s.add_dependency 'spree_core', '> 2.3'
   #s.add_dependency 'spree_frontend'
-
+  
+  s.add_dependency 'spree_core', '> 2.3'
+  #s.add_dependency 'stripe_event', "~> 0.1.4"
+  
   # test suite
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'capybara'
@@ -29,4 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'database_cleaner', '1.0.1'
   s.add_development_dependency 'simplecov', '~> 0.7.1'
+
+  #s.add_development_dependency 'stripe_tester', "~> 0.1.4"
 end

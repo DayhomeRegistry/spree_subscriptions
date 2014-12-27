@@ -1,9 +1,9 @@
 Spree::LineItem.class_eval do
   
-  has_many :subscriptions, :dependent => :destroy
+  # has_many :subscriptions, :dependent => :destroy
   
-  def subscription?
-    variant.subscription?
+  def is_subscription?
+    variant.is_subscription?
   end
   
   private

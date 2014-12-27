@@ -1,0 +1,10 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+
+= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Plans' } 
+
+= render :partial => 'spree/shared/error_messages', :locals => { :target => @plan }
+= form_for [:admin, @product, @plan] do |f|
+  %fieldset{"data-hook" => "admin_plan_new_form"}
+    %legend{:align => "center"}= Spree.t(:update_plan)
+    = render :partial => 'form', :locals => { :f => f }
+    = render :partial => 'spree/admin/shared/edit_resource_links'

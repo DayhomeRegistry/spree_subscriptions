@@ -1,0 +1,20 @@
+.label-block.alpha{"data-hook" => "admin_plan_form_fields"}
+  .row
+    .three.columns{"data-hook" => "plans"}
+      .field{"data-hook" => "variant"}
+        = f.label :variant_id, Spree.t(:variant) 
+        = f.collection_select(:variant_id, @variants, :id, :sku, { }, { :class => 'select2 fullwidth' }) 
+    .three.columns{"data-hook" => "plans"}
+      .field{"data-hook" => "payment_method"}
+        = f.label :payment_method_id, Spree.t(:payment_method)
+        = f.collection_select(:payment_method_id, @payment_methods, :id, :name, { }, { :class => 'select2 fullwidth' }) 
+    .four.columns{"data-hook" => "plans"}
+      .field{"data-hook" => "name"}
+        = f.label :name, Spree.t(:name)
+        = f.text_field :name, :class => 'fullwidth'      
+  .row
+    .ten.columns
+      .field{"data-hook" => "description"}
+        = f.label :description, Spree.t(:description)
+        = f.text_area :description, :class => 'fullwidth'      
+.clear

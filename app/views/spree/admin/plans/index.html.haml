@@ -1,0 +1,69 @@
+
+= render :partial => 'spree/admin/shared/product_sub_menu'
+= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => 'Plans'}
+%fieldset{"data-hook" => "admin_plans"}
+  %legend{:align => "center"}= Spree.t(:plans)
+  #new_plan
+  - if @plans.any?
+    %table.index.sortable{"data-sortable-link" => "#{update_positions_admin_product_plans_path(@product)}"}
+      %colgroup
+        %col{:style => "width: 25%"}/
+        %col{:style => "width: 25%"}/
+        %col{:style => "width: 16.5%"}/
+        %col{:style => "width: 16.5%"}/
+        %col{:style => "width: 16.5%"}/
+      %thead{"data-hook" => "variants_header"}
+        %tr
+          %th= Spree.t(:variant)
+          %th= Spree.t(:payment_method)
+          %th= Spree.t(:name)
+          %th= Spree.t(:payment_method_plan_id)
+          %th.actions
+      %tbody
+        - @plans.each do |plan|
+          %tr{:id => "#{spree_dom_id plan}", :style=> "#{'color:red;' if plan.deleted?}", 'data-hook'=>"plan_row", :class=>"#{cycle('odd', 'even')}"}
+            %td= plan.variant.sku
+            %td.align-center= plan.payment_method.name
+            %td.align-center= plan.name
+            %td.align-center= plan.api_plan_id
+            %td.actions
+              = link_to_edit(plan, :no_text => true) unless plan.deleted?
+              = link_to_delete(plan, :no_text => true) unless plan.deleted?
+        - unless @product.has_variants?
+          %tr
+            %td{:colspan => "5"}= Spree.t(:none)
+  - else
+    .alpha.twelve.columns.no-objects-found
+      -if @deleted.blank?
+        = succeed(', ') do
+          = Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/plans'))
+        = succeed('!') do
+          =link_to Spree.t(:add_one), spree.new_admin_product_plan_path(@product)
+      -else
+        = Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/plans'))
+  - if @product.empty_option_values?
+    %p.first_add_option_types.no-objects-found{"data-hook" => "first_add_option_types"}
+      = Spree.t(:to_add_variants_you_must_first_define)
+      = link_to Spree.t(:option_types), admin_product_url(@product)
+      = Spree.t(:and)
+      = link_to Spree.t(:option_values), admin_option_types_url
+  - else
+    - content_for :page_actions do
+      %ul.inline-menu{"data-hook" => "toolbar"}
+        %li#new_var_link{"data-hook" => ""}
+          = link_to_with_icon('plus',                 |
+             Spree.t(:new_plan),                      |
+             new_admin_product_plan_url(@product),    |
+             :'data-update' => 'new_plan',            |
+             :class => 'button'                       |
+            )                                         |
+        %li= link_to_with_icon('filter', @deleted.blank? ? Spree.t(:show_deleted) : Spree.t(:show_active), admin_product_plans_url(@product, :deleted => @deleted.blank? ? "on" : "off"), :class => 'button')
+
+/ = render :partial => 'spree/admin/shared/product_sub_menu'
+/ = render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Subscriptions"}
+/ - if @product.has_variants?
+/   - for variant in @product.variants_including_master do
+/     = render 'form', :variant => variant
+/ - else
+/   This product has no variants.
+/   = render 'form', :variant => @product.master

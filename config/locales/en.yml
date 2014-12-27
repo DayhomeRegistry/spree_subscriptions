@@ -1,3 +1,4 @@
+---
 en:
   spree:
     controller:
@@ -5,3 +6,28 @@ en:
     subscriptions:
       subscriptions: Subscriptions
       plans: Plans
+      interval: Interval
+      every: Every
+      currency: Currency
+      amount: Amount
+      trial_period_days: Trial period
+      active: Active
+      savings_of: A savings of
+    order_state:
+      subscription: Subscription
+      subscription_confirmation: Confirm
+    subscribe: "Subscribe"
+    subscription_information: Subscription Information
+    subscription_confirmation: Subscription Confirmation
+    order_populator:
+      subscriptions_must_be_purchased_separately: ! 'Subscriptions must be purchased separately.'
+      subscription_duplicate: 'You have already subscribed to this plan.'
+    new_plan: New Plan
+    update_plan: Update Plan
+    payment_method_plan_id: Plan ID
+    paypal_subscription_description: You will be redirected to PayPal when you click the Save button below.
+  activerecord:
+    models:
+      spree/plans:
+        one: Plan
+        other: Plans

@@ -1,0 +1,8 @@
+%fieldset#payment{"data-hook" => ""}
+  %legend{:align => "center"}= Spree.t(:subscription_confirmation)
+  
+%br.space/
+.form-buttons{"data-hook" => "buttons"}
+  = submit_tag Spree.t(:save_and_continue), :class => 'continue button primary'
+  :javascript
+    Spree.disableSaveOnClick();

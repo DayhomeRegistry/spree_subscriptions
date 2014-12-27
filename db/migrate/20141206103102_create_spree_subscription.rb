@@ -2,9 +2,8 @@ class CreateSpreeSubscription < ActiveRecord::Migration
   def change
     create_table :spree_subscriptions do |t|
       t.integer :plan_id
-      t.string :email
       t.integer :user_id
-      t.string :card_customer_token
+      t.string :api_sub_id
       t.datetime :subscribed_at
       t.datetime :unsubscribed_at
     end
