@@ -5,7 +5,7 @@ module SpreeSubscriptions
     config.autoload_paths += %W(#{config.root}/lib)
 
     initializer "spree.spree_subscriptions.preferences", :after => "spree.environment" do |app|
-      Spree::SpreeSubscriptionsConfiguration = Spree::SpreeSubscriptionsConfiguration.new
+      Spree::SubscriptionsConfiguration = Spree::SpreeSubscriptionsConfiguration.new
     end
     initializer "spree.spree_subscriptions.subscription_providers", :after => "spree.register.payment_methods" do |app|
       app.config.spree.add_class('subscription_providers')

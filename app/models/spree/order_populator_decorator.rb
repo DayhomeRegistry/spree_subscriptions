@@ -22,15 +22,17 @@ module OrderPopulatorExtensions
   def ensure_empty_cart_for_subscription(variant_id)
     variant = Spree::Variant.find(variant_id)
     if (variant.is_subscription? && @order.item_count>0) || @order.has_subscription?
-        errors.add(:base, Spree.t(:subscriptions_must_be_purchsed_separately, scope: :order_populator))
+        errors.add(:base, Spree.t(:subscriptions_must_be_purchased_separately, scope: :order_populator))
         return false
     end
     byebug
-    if(!Spree::SpreeSubscriptionsConfiguration[:allow_duplicate_subscription])
+    if(!Spree::SubscriptionsConfiguration[:allow_duplicate_subscription])
       #check here to see if they have a subscription
-      if(@order.user.has_subscription(variant))
-        errors.add(:base, Spree.t(:subscription_duplicate, scope: :order_populator))
-        return false
+      if(@order.user)
+        if(@order.user.has_subscription(variant))
+          errors.add(:base, Spree.t(:subscription_duplicate, scope: :order_populator))
+          return false
+        end
       end
     end
     return true

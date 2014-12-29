@@ -1,7 +1,7 @@
 Deface::Override.new(:virtual_path => "spree/admin/shared/_product_tabs",
                      :name => "add_digital_versions_to_admin_product_tabs",
                      :insert_bottom => "[data-hook='admin_product_tabs'], #admin_product_tabs[data-hook]",
-                     :text => " <% if @product.is_subscription? %>   <li<%== ' class=\"active\"' if current == \"Plans\" %>>
+                     :text => " <% if @product.preferred_subscription %>   <li<%== ' class=\"active\"' if current == \"Plans\" %>>
       <%= link_to admin_product_plans_path(@product), class: 'fa fa-repeat icon_link with_tip' do %>
         <span class=\"text\"><%= Spree.t(:plans, scope: 'subscriptions') %></span>
       <% end %>

@@ -1,4 +1,3 @@
-
 Deface::Override.new(:virtual_path => "spree/products/_cart_form",
 					 :name => 'replace_add_to_cart_button',
 					 :replace_contents => "erb[loud]:contains('add_to_cart')",

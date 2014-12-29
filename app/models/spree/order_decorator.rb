@@ -1,12 +1,19 @@
 Spree::Order.class_eval do
-  # all products are subscriptions
-  # def subscription?
-  #   line_items.all? { |item| item.subscription? }
-  # end
+
+  def validate
+    self.errors.add_to_base(@variant_errors) unless @variant_errors.nil?
+  end
   
-  # def some_subscription?
-  #   line_items.any? { |item| item.subscription? }
-  # end
+  def add_variant(variant, quantity = 1)
+    if variant.nil? || (!variant.in_stock? && !Spree::Config[:allow_backorders])
+      @variant_errors = I18n.t('variant_out_of_stock') 
+    else
+      self.add_variant_original(variant, quantity)
+    end
+  end
+  alias_method :add_variant_original, :add_variant
+  alias_method :validate_original, :validate
+  
   attr_accessor :redirect_to, :pay_pal_token, :pay_pal_payer_id
 
 
